@@ -221,67 +221,38 @@
             });
 
             // Lógica de envio do formulário do vendedor
-            cadastroForm.addEventListener('submit', (e) => {
-                e.preventDefault();
+            // Lógica de envio do formulário do vendedor
+cadastroForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-                const formData = new FormData(cadastroForm);
-                const novaAtividade = {
-                    titulo: formData.get('titulo'),
-                    descricao: formData.get('descricao'),
-                    categoria: formData.get('categoria'),
-                    imagemUrl: formData.get('imagemUrl') || 'https://placehold.co/250x250/E5E7EB/4B5563?text=Imagem+Atividade',
-                    data: new Date().toLocaleString()
-                };
+    const formData = new FormData(cadastroForm);
+    const novaAtividade = {
+        name: formData.get('titulo'),
+        description: formData.get('descricao'),
+        category: formData.get('categoria'),
+        address: "Endereço não informado",
+        phone: "(00) 00000-0000",
+        cityId: "67f0c98a9f2d34", // 🔹 Substituir pelo _id real da cidade
+    };
 
-                // Adiciona a nova atividade à lista (simulando um "banco de dados")
-                atividades.push(novaAtividade);
-                
-                // Limpa o formulário
-                cadastroForm.reset();
+    try {
+        const res = await fetch(`${API_BASE}/establishments`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(novaAtividade)
+        });
 
-                // Atualiza as listas em ambos os painéis
-                updateLists();
-                
-                // Mensagem de sucesso
-                alert('Atividade cadastrada com sucesso!');
-            });
+        if (!res.ok) throw new Error("Erro ao cadastrar");
 
-            // Função para renderizar as atividades nas listas
-            function updateLists() {
-                // Limpa as listas existentes
-                atividadesList.innerHTML = '';
-                atividadesRecentesList.innerHTML = '';
-
-                if (atividades.length === 0) {
-                    atividadesList.innerHTML = '<p class="text-gray-400">Nenhuma atividade cadastrada ainda.</p>';
-                    atividadesRecentesList.innerHTML = '<p class="text-gray-400">Nenhuma atividade recente para exibir.</p>';
-                } else {
-                    // Renderiza as atividades na lista do vendedor
-                    atividades.forEach(atividade => {
-                        const atividadeDiv = document.createElement('div');
-                        atividadeDiv.className = 'bg-gray-50 p-4 rounded-md shadow-sm';
-                        atividadeDiv.innerHTML = `
-                            <h4 class="font-semibold">${atividade.titulo}</h4>
-                            <p class="text-gray-600 text-sm">${atividade.descricao}</p>
-                            <p class="text-gray-400 text-xs mt-2">Categoria: ${atividade.categoria}</p>
-                        `;
-                        atividadesList.appendChild(atividadeDiv);
-                    });
-
-                    // Renderiza as atividades na lista do administrador (em ordem decrescente de data)
-                    const atividadesReversas = [...atividades].reverse();
-                    atividadesReversas.forEach(atividade => {
-                        const atividadeDiv = document.createElement('div');
-                        atividadeDiv.className = 'bg-gray-50 p-4 rounded-md shadow-sm';
-                        atividadeDiv.innerHTML = `
-                            <h4 class="font-semibold text-blue-600">${atividade.titulo}</h4>
-                            <p class="text-gray-600 text-sm">${atividade.descricao}</p>
-                            <p class="text-gray-400 text-xs mt-2">Categoria: ${atividade.categoria} • ${atividade.data}</p>
-                        `;
-                        atividadesRecentesList.appendChild(atividadeDiv);
-                    });
-                }
-            }
+        const saved = await res.json();
+        atividades.push(saved);
+        cadastroForm.reset();
+        updateLists();
+        alert('Atividade cadastrada com sucesso!');
+    } catch (err) {
+        alert("Erro ao salvar: " + err.message);
+    }
+});
 
             // Inicia o painel do cliente por padrão
             showTab('cliente');

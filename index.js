@@ -1,4 +1,56 @@
-// Função para lidar com a geolocalização do usuário
+const API_BASE = "http://localhost:3000/api";
+let currentCityId = null; // Armazena o _id da cidade atual
+
+// Buscar ID da cidade pelo nome
+async function getCityId(cityName) {
+    try {
+        const res = await fetch(`${API_BASE}/cities`);
+        const cities = await res.json();
+        const city = cities.find(c => c.name.toLowerCase() === cityName.toLowerCase());
+        if (city) {
+            currentCityId = city._id;
+            console.log("Cidade carregada:", city.name, "ID:", currentCityId);
+        } else {
+            console.error("Cidade não encontrada no banco.");
+        }
+    } catch (err) {
+        console.error("Erro ao buscar cidade:", err);
+    }
+}
+
+// Lógica para modais (igual antes)
+function setupModals() {
+    const loginButton = document.getElementById('loginButton');
+    const signupButton = document.getElementById('signupButton');
+    const loginModal = document.getElementById('loginModal');
+    const signupModal = document.getElementById('signupModal');
+    const closeLogin = document.getElementById('closeLogin');
+    const closeSignup = document.getElementById('closeSignup');
+    const goToSignup = document.getElementById('goToSignup');
+    const goToLogin = document.getElementById('goToLogin');
+    
+    loginButton.addEventListener('click', () => loginModal.style.display = 'flex');
+    signupButton.addEventListener('click', () => signupModal.style.display = 'flex');
+    closeLogin.addEventListener('click', () => loginModal.style.display = 'none');
+    closeSignup.addEventListener('click', () => signupModal.style.display = 'none');
+
+    goToSignup.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+        signupModal.style.display = 'flex';
+    });
+
+    goToLogin.addEventListener('click', () => {
+        signupModal.style.display = 'none';
+        loginModal.style.display = 'flex';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === loginModal) loginModal.style.display = 'none';
+        if (event.target === signupModal) signupModal.style.display = 'none';
+    });
+}
+
+// Geolocalização
 function getUserLocation() {
     const locationInfo = document.getElementById("location-info");
     if (navigator.geolocation) {
@@ -8,134 +60,65 @@ function getUserLocation() {
                 const lon = position.coords.longitude.toFixed(4);
                 locationInfo.textContent = `Sua localização atual: Latitude ${lat}, Longitude ${lon}`;
             },
-            (error) => {
-                locationInfo.textContent = "Não foi possível obter a sua localização.";
-                console.error("Erro ao obter a geolocalização: ", error);
-            }
+            () => locationInfo.textContent = "Não foi possível obter a sua localização."
         );
     } else {
         locationInfo.textContent = "Geolocalização não é suportada por este navegador.";
     }
 }
 
-// Lógica de busca em tempo real
-const searchInput = document.getElementById("highlight");
-const cards = document.querySelectorAll(".card-services");
+// Buscar estabelecimentos da API
+async function loadEstablishments(category) {
+    if (!currentCityId) {
+        console.error("CityId ainda não carregado.");
+        return;
+    }
 
-searchInput.addEventListener("input", function () {
-    const searchTerm = searchInput.value.toLowerCase();
-    
-    cards.forEach(card => {
-        const cardContent = card.textContent.toLowerCase();
-        
-        if (cardContent.includes(searchTerm)) {
-            card.style.display = "flex";
-        } else {
-            card.style.display = "none";
+    try {
+        const res = await fetch(`${API_BASE}/establishments/${currentCityId}/${category}`);
+        const establishments = await res.json();
+
+        const container = document.querySelector(".config-card");
+        container.innerHTML = "";
+
+        if (!establishments.length) {
+            container.innerHTML = "<p>Nenhum estabelecimento encontrado.</p>";
+            return;
         }
-    });
-});
 
-// Lógica para o botão "Conferir lista"
-const renderButtons = document.querySelectorAll(".render-button");
-const listServices = document.querySelectorAll(".list-services-ul");
-
-// Oculta todas as listas por padrão
-listServices.forEach(list => {
-    list.style.display = "none";
-});
-
-renderButtons.forEach(button => {
-    button.addEventListener("click", function () {
-        const parentCard = this.closest(".card-services");
-        const list = parentCard.querySelector(".list-services-ul");
-
-        if (list.style.display === "none" || list.style.display === "") {
-            list.style.display = "flex";
-        } else {
-            list.style.display = "none";
-        }
-    });
-});
-
-// Chama a função de geolocalização ao carregar a página
-document.addEventListener("DOMContentLoaded", getUserLocation);
-
-        // Lógica para os modais de login e cadastro
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginButton = document.getElementById('loginButton');
-            const signupButton = document.getElementById('signupButton');
-            const loginModal = document.getElementById('loginModal');
-            const signupModal = document.getElementById('signupModal');
-            const closeLogin = document.getElementById('closeLogin');
-            const closeSignup = document.getElementById('closeSignup');
-            const goToSignup = document.getElementById('goToSignup');
-            const goToLogin = document.getElementById('goToLogin');
-            
-            // Abrir modal de login
-            loginButton.addEventListener('click', function() {
-                loginModal.style.display = 'flex';
-            });
-            
-            // Abrir modal de cadastro
-            signupButton.addEventListener('click', function() {
-                signupModal.style.display = 'flex';
-            });
-            
-            // Fechar modais
-            closeLogin.addEventListener('click', function() {
-                loginModal.style.display = 'none';
-            });
-            
-            closeSignup.addEventListener('click', function() {
-                signupModal.style.display = 'none';
-            });
-            
-            // Alternar entre login e cadastro
-            goToSignup.addEventListener('click', function() {
-                loginModal.style.display = 'none';
-                signupModal.style.display = 'flex';
-            });
-            
-            goToLogin.addEventListener('click', function() {
-                signupModal.style.display = 'none';
-                loginModal.style.display = 'flex';
-            });
-            
-            // Fechar modal ao clicar fora dele
-            window.addEventListener('click', function(event) {
-                if (event.target === loginModal) {
-                    loginModal.style.display = 'none';
-                }
-                if (event.target === signupModal) {
-                    signupModal.style.display = 'none';
-                }
-            });
-            
-            // Validação do formulário de cadastro
-            document.getElementById('signupForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const password = document.getElementById('signupPassword').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-                
-                if (password !== confirmPassword) {
-                    alert('As senhas não coincidem!');
-                    return;
-                }
-                
-                // Aqui você normalmente enviaria os dados para o servidor
-                alert('Cadastro realizado com sucesso!');
-                signupModal.style.display = 'none';
-            });
-            
-            // Validação do formulário de login
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Aqui você normalmente validaria as credenciais com o servidor
-                alert('Login realizado com sucesso!');
-                loginModal.style.display = 'none';
-            });
+        establishments.forEach(est => {
+            const card = document.createElement("div");
+            card.className = "card-services";
+            card.innerHTML = `
+                <h1 class="header-category">${est.category}</h1>
+                <h2>${est.name}</h2>
+                <p>${est.description}</p>
+                <p><strong>Endereço:</strong> ${est.address}</p>
+                <p><strong>Telefone:</strong> ${est.phone}</p>
+            `;
+            container.appendChild(card);
         });
-    
+    } catch (err) {
+        console.error("Erro ao carregar estabelecimentos:", err);
+    }
+}
+
+// Botões "Buscar"
+function setupListButtons() {
+    const renderButtons = document.querySelectorAll(".render-button");
+    renderButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const parentCard = button.closest(".card-services");
+            const category = parentCard.querySelector(".header-category").textContent;
+            loadEstablishments(category);
+        });
+    });
+}
+
+// Inicialização
+document.addEventListener("DOMContentLoaded", async () => {
+    await getCityId("Frecheirinha"); // 🔹 busca ID da cidade no banco
+    getUserLocation();
+    setupListButtons();
+    setupModals();
+});
