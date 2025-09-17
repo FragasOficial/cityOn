@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-services {
+            background-color: rgb(255, 255, 255);
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            margin: 10px;
+        }
+        .header-category {
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .render-img {
+            width: 80%;
+            max-width: 250px;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .list-services-ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .render-button {
+            background-color: white;
+            color: #007bff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-size: 0.8em;
+            transition: all 0.3s ease;
+        }
+        .render-button:hover {
+            background-color: #007bff;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .tab-button.active {
+            border-bottom: 2px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center">
+    <div class="container mx-auto p-6 md:p-10">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Painel Administrativo</h1>
+            <p class="text-gray-500 mt-2">Gerencie e monitore as atividades da plataforma.</p>
+        </header>
+
+        <main class="card p-6 md:p-8">
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4 mb-8">
+                <button id="clienteTab" class="tab-button py-2 px-6 rounded-md text-gray-600 hover:text-blue-500 hover:border-blue-500 active">
+                    Painel do Cliente
+                </button>
+                <button id="vendedorTab" class="tab-button py-2 px-6 rounded-md text-gray-600 hover:text-blue-500 hover:border-blue-500">
+                    Painel do Vendedor
+                </button>
+                <button id="adminTab" class="tab-button py-2 px-6 rounded-md text-gray-600 hover:text-blue-500 hover:border-blue-500">
+                    Painel do Administrador
+                </button>
+            </div>
+
+            <!-- Conteúdo do Painel do Cliente -->
+            <div id="clientePanel" class="tab-panel">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Área do Cliente</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6 text-center">
+                        <h3 class="text-xl font-medium text-gray-600 mb-2">Meus Pedidos</h3>
+                        <p class="text-sm text-gray-400">Visualize o status dos seus pedidos e serviços.</p>
+                    </div>
+                    <div class="card p-6 text-center">
+                        <h3 class="text-xl font-medium text-gray-600 mb-2">Histórico de Atividades</h3>
+                        <p class="text-sm text-gray-400">Acompanhe todas as suas interações passadas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdo do Painel do Vendedor -->
+            <div id="vendedorPanel" class="tab-panel hidden">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Área do Vendedor</h2>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                    <div class="card p-6 w-full md:w-1/2 mb-6 md:mb-0 mr-0 md:mr-4">
+                        <h3 class="text-xl font-medium text-gray-600 mb-4">Minhas Atividades</h3>
+                        <div id="minhasAtividadesList" class="space-y-4">
+                            <!-- Atividades do vendedor serão listadas aqui -->
+                            <p class="text-gray-400">Nenhuma atividade cadastrada ainda.</p>
+                        </div>
+                    </div>
+                    <div class="card p-6 w-full md:w-1/2 ml-0 md:ml-4">
+                        <div class="card-services w-full max-w-lg mx-auto">
+                            <h1 class="header-category">Cadastro de Atividade</h1>
+                            <img src="https://placehold.co/250x250/E5E7EB/4B5563?text=Imagem+Atividade" alt="Imagem de atividade" class="render-img">
+                            <form id="cadastroAtividadeForm" class="w-full space-y-4">
+                                <div class="form-group">
+                                    <label for="titulo-atividade">Título da Atividade:</label>
+                                    <input type="text" id="titulo-atividade" name="titulo" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="descricao-atividade">Descrição:</label>
+                                    <textarea id="descricao-atividade" name="descricao" rows="3" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoria-atividade">Categoria:</label>
+                                    <select id="categoria-atividade" name="categoria" required>
+                                        <option value="">Selecione a categoria</option>
+                                        <option value="Serviços">Serviços</option>
+                                        <option value="Produtos">Produtos</option>
+                                        <option value="Imóveis">Imóveis</option>
+                                        <option value="Eventos">Eventos</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagem-url">URL da Imagem:</label>
+                                    <input type="url" id="imagem-url" name="imagemUrl">
+                                </div>
+                                <button type="submit" class="render-button w-full">Cadastrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdo do Painel do Administrador -->
+            <div id="adminPanel" class="tab-panel hidden">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Área do Administrador</h2>
+                <p class="text-gray-500 mb-6 text-center">Acompanhe as atividades dos vendedores em tempo real.</p>
+                <div class="card p-6">
+                    <h3 class="text-xl font-medium text-gray-600 mb-4">Atividades Recentes</h3>
+                    <div id="atividadesRecentesList" class="space-y-4">
+                        <!-- Atividades em tempo real serão listadas aqui -->
+                        <p class="text-gray-400">Nenhuma atividade recente para exibir.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const panels = document.querySelectorAll('.tab-panel');
+            const cadastroForm = document.getElementById('cadastroAtividadeForm');
+            const atividadesList = document.getElementById('minhasAtividadesList');
+            const atividadesRecentesList = document.getElementById('atividadesRecentesList');
+
+            // Simulação de banco de dados em tempo real
+            let atividades = [];
+
+            // Função para alternar entre as abas
+            function showTab(tabId) {
+                panels.forEach(panel => panel.classList.add('hidden'));
+                document.getElementById(tabId + 'Panel').classList.remove('hidden');
+                tabs.forEach(tab => tab.classList.remove('active'));
+                document.getElementById(tabId + 'Tab').classList.add('active');
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    const tabId = e.target.id.replace('Tab', '');
+                    showTab(tabId);
+                });
+            });
+
+            // Lógica de envio do formulário do vendedor
+            cadastroForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const formData = new FormData(cadastroForm);
+                const novaAtividade = {
+                    titulo: formData.get('titulo'),
+                    descricao: formData.get('descricao'),
+                    categoria: formData.get('categoria'),
+                    imagemUrl: formData.get('imagemUrl') || 'https://placehold.co/250x250/E5E7EB/4B5563?text=Imagem+Atividade',
+                    data: new Date().toLocaleString()
+                };
+
+                // Adiciona a nova atividade à lista (simulando um "banco de dados")
+                atividades.push(novaAtividade);
+                
+                // Limpa o formulário
+                cadastroForm.reset();
+
+                // Atualiza as listas em ambos os painéis
+                updateLists();
+                
+                // Mensagem de sucesso
+                alert('Atividade cadastrada com sucesso!');
+            });
+
+            // Função para renderizar as atividades nas listas
+            function updateLists() {
+                // Limpa as listas existentes
+                atividadesList.innerHTML = '';
+                atividadesRecentesList.innerHTML = '';
+
+                if (atividades.length === 0) {
+                    atividadesList.innerHTML = '<p class="text-gray-400">Nenhuma atividade cadastrada ainda.</p>';
+                    atividadesRecentesList.innerHTML = '<p class="text-gray-400">Nenhuma atividade recente para exibir.</p>';
+                } else {
+                    // Renderiza as atividades na lista do vendedor
+                    atividades.forEach(atividade => {
+                        const atividadeDiv = document.createElement('div');
+                        atividadeDiv.className = 'bg-gray-50 p-4 rounded-md shadow-sm';
+                        atividadeDiv.innerHTML = `
+                            <h4 class="font-semibold">${atividade.titulo}</h4>
+                            <p class="text-gray-600 text-sm">${atividade.descricao}</p>
+                            <p class="text-gray-400 text-xs mt-2">Categoria: ${atividade.categoria}</p>
+                        `;
+                        atividadesList.appendChild(atividadeDiv);
+                    });
+
+                    // Renderiza as atividades na lista do administrador (em ordem decrescente de data)
+                    const atividadesReversas = [...atividades].reverse();
+                    atividadesReversas.forEach(atividade => {
+                        const atividadeDiv = document.createElement('div');
+                        atividadeDiv.className = 'bg-gray-50 p-4 rounded-md shadow-sm';
+                        atividadeDiv.innerHTML = `
+                            <h4 class="font-semibold text-blue-600">${atividade.titulo}</h4>
+                            <p class="text-gray-600 text-sm">${atividade.descricao}</p>
+                            <p class="text-gray-400 text-xs mt-2">Categoria: ${atividade.categoria} • ${atividade.data}</p>
+                        `;
+                        atividadesRecentesList.appendChild(atividadeDiv);
+                    });
+                }
+            }
+
+            // Inicia o painel do cliente por padrão
+            showTab('cliente');
+
+            // Renderiza as listas iniciais
+            updateLists();
+        });
+    </script>
+</body>
+</html>

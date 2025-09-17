@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FragasCity</title>
+    <link rel="stylesheet" href="globalStyle.css">
+    <script src="./index.js" defer></script>
+</head>
+<body class="config-general">
+    <header>
+        <div class="config-header">
+            <div class="img-localization">
+                <img src="./image/logo-city.avif" alt="Logo cidade" class="logo-topo">  
+                <div class="localization">
+                    <h1 class="title-header">Sua cidade na palma da sua mão</h1>
+                    <p id="location-info">Localizando sua posição...</p>
+                </div>
+            </div>
+            <div class="input-h1">
+                <div id="divBusca">
+                    <input type="text" class="txtBusca" id="highlight" placeholder="Buscar produtos/serviços nessa cidade..."/>
+                </div> 
+            </div> 
+            <!-- Botões de autenticação adicionados -->
+            <div class="auth-buttons">
+                <button class="auth-button login-btn" id="loginButton">Login</button>
+                <button class="auth-button signup-btn" id="signupButton">Cadastro</button>
+            </div> 
+        </div>
+    </header>
+    <section>
+        <div class="config-card">
+            <div class="card-services">
+                <h1 class="header-category">Saúde</h1>
+                <img src="./image/saude.png" alt="saúde" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="saude.html">Hospitais e clínicas</a></li>
+                    <li><a href="saude.html">Postos de saúde</a></li>
+                    <li><a href="saude.html">Farmácias</a></li>
+                    <li><a href="saude.html">Serviços de emergência</a></li>
+                    <li><a href="saude.html">Campanhas de vacinação</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Educação</h1>
+                <img src="./image/educação.png" alt="serviços educacionais" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="educacao.html">Escolas (primárias, secundárias)</a></li>
+                    <li><a href="educacao.html">Creches e pré-escolas</a></li>
+                    <li><a href="educacao.html">Bibliotecas públicas</a></li>
+                    <li><a href="educacao.html">Universidades</a></li>
+                    <li><a href="educacao.html">Faculdades</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Transporte</h1>
+                <img src="./image/transporte.png" alt="transporte" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="transporte.html">Ônibus escolar/urbano/interurbano</a></li>
+                    <li><a href="transporte.html">Mototáxi</a></li>
+                    <li><a href="transporte.html">Táxi</a></li>
+                    <li><a href="transporte.html">Uber/99taxi</a></li>
+                    <li><a href="transporte.html">Aeroportos</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Segurança</h1>
+                <img src="./image/segurança.png" alt="" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="seguranca.html">Polícia</a></li>
+                    <li><a href="seguranca.html">Bombeiros</a></li>
+                    <li><a href="seguranca.html">Guarda municipal</a></li>
+                    <li><a href="seguranca.html">Defesa civil</a></li>
+                    <li><a href="seguranca.html">Segurança digital</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Saneamento</h1>
+                <img src="./image/saneamento.png" alt="" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="saneamento.html">Água</a></li>
+                    <li><a href="saneamento.html">Esgoto</a></li>
+                    <li><a href="saneamento.html">Coleta de lixo</a></li>
+                    <li><a href="saneamento.html">Limpeza pública</a></li>
+                    <li><a href="saneamento.html">Córregos/rios/riachos</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Comunicação</h1>
+                <img src="./image/comunicação.png" alt="meio de comunicação" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="comunicacao.html">Polícia</a></li>
+                    <li><a href="comunicacao.html">Ambulância</a></li>
+                    <li><a href="comunicacao.html">Bombeiros</a></li>
+                    <li><a href="comunicacao.html">Conselho tutelar</a></li>
+                    <li><a href="comunicacao.html">Câmara municipal</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Comércio</h1>
+                <img src="./image/comércio.png" alt="comércio" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="comercio.html">Supermercados</a></li>
+                    <li><a href="comercio.html">Lojas de varejo/atacado</a></li>
+                    <li><a href="comercio.html">Bares</a></li>
+                    <li><a href="comercio.html">Restaurantes</a></li>
+                    <li><a href="comercio.html">Lanchonetes</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Serviços</h1>
+                <img src="./image/serviços.png" alt="serviços" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="servicos.html">Cartório</a></li>
+                    <li><a href="servicos.html">Fórum</a></li>
+                    <li><a href="servicos.html">Correios</a></li>
+                    <li><a href="servicos.html">Bancos/correspondentes</a></li>
+                    <li><a href="servicos.html">Lotéricas Caixa</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Lazer e Cultura</h1>
+                <img src="./image/cultura.png" alt="cultura e lazer" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="lazer-cultura.html">Praças</a></li>
+                    <li><a href="lazer-cultura.html">Balneários</a></li>
+                    <li><a href="lazer-cultura.html">Polo de lazer</a></li>
+                    <li><a href="lazer-cultura.html">Festejos da padroeira</a></li>
+                    <li><a href="lazer-cultura.html">Festas juninas</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Fontes de energia</h1>
+                <img src="./image/energia.webp" alt="fontes de energia" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="fontes-energia.html">Energia hidrelétrica</a></li>
+                    <li><a href="fontes-energia.html">Energia solar</a></li>
+                    <li><a href="fontes-energia.html">Energia fotovoltaica</a></li>
+                    <li><a href="fontes-energia.html">Querosene</a></li>
+                    <li><a href="fontes-energia.html">Postos de combustíveis</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Administração Pública</h1>
+                <img src="./image/administrar.png" alt="prefeitura" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="adm-publica.html">Prefeitura</a></li>
+                    <li><a href="adm-publica.html">Secretarias</a></li>
+                    <li><a href="adm-publica.html">Câmara municipal</a></li>
+                    <li><a href="adm-publica.html">Ouvidoria municipal</a></li>
+                    <li><a href="adm-publica.html">Controladoria Geral do Município</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+            <div class="card-services">
+                <h1 class="header-category">Serviços Públicos</h1>
+                <img src="./image/serv-publico.jpg" alt="servidor público" class="render-img">
+                <ul class="list-services-ul">
+                    <li><a href="servicos-publicos.html">Agendamento de consultas</a></li>
+                    <li><a href="servicos-publicos.html">Fornecimento de medicamentos</a></li>
+                    <li><a href="servicos-publicos.html">Coleta de lixo</a></li>
+                    <li><a href="servicos-publicos.html">Serviços de gás</a></li>
+                    <li><a href="servicos-publicos.html">Manutenção de estradas/vias</a></li>
+                </ul>
+                <button class="render-button">Buscar</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="config-footer">
+            <div class="card-footer">
+                <h1 class="header-footer">Contatos</h1>
+            </div>
+            <div class="card-footer">
+                <h1 class="header-footer">Endereços</h1>
+            </div>
+            <div class="card-footer">
+                <h1 class="header-footer">Links úteis</h1>
+            </div>
+        </div>
+    </footer>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLogin">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">E-mail</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Senha</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">Entrar</button>
+            </form>
+            <div class="switch-form">
+                <p>Não tem uma conta? <a id="goToSignup">Cadastre-se</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeSignup">&times;</span>
+            <h2>Cadastro</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Nome Completo</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">E-mail</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Senha</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar Senha</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Conta</label>
+                    <div class="user-type">
+                        <label>
+                            <input type="radio" name="userType" value="cliente" checked> Cliente
+                        </label>
+                        <label>
+                            <input type="radio" name="userType" value="vendedor"> Vendedor
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Criar Conta</button>
+            </form>
+            <div class="switch-form">
+                <p>Já tem uma conta? <a id="goToLogin">Fazer Login</a></p>
+            </div>
+        </div>
+    </div>
+     <script>
+        // Função para lidar com a geolocalização do usuário
+        function getUserLocation() {
+            const locationInfo = document.getElementById("location-info");
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude.toFixed(4);
+                        const lon = position.coords.longitude.toFixed(4);
+                        locationInfo.textContent = `Sua localização atual: Latitude ${lat}, Longitude ${lon}`;
+                    },
+                    (error) => {
+                        locationInfo.textContent = "Não foi possível obter a sua localização.";
+                        console.error("Erro ao obter a geolocalização: ", error);
+                    }
+                );
+            } else {
+                locationInfo.textContent = "Geolocalização não é suportada por este navegador.";
+            }
+        }
+
+        // Lógica de busca em tempo real
+        const searchInput = document.getElementById("highlight");
+        const cards = document.querySelectorAll(".card-services");
+
+        searchInput.addEventListener("input", function () {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            cards.forEach(card => {
+                const cardContent = card.textContent.toLowerCase();
+                
+                if (cardContent.includes(searchTerm)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+
+        // Lógica para o botão "Conferir lista"
+        const renderButtons = document.querySelectorAll(".render-button");
+        const listServices = document.querySelectorAll(".list-services-ul");
+
+        // Oculta todas as listas por padrão
+        listServices.forEach(list => {
+            list.style.display = "none";
+        });
+
+        renderButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const parentCard = this.closest(".card-services");
+                const list = parentCard.querySelector(".list-services-ul");
+
+                if (list.style.display === "none" || list.style.display === "") {
+                    list.style.display = "flex";
+                } else {
+                    list.style.display = "none";
+                }
+            });
+        });
+
+        // Lógica para os modais de login e cadastro
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginButton = document.getElementById('loginButton');
+            const signupButton = document.getElementById('signupButton');
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            const closeLogin = document.getElementById('closeLogin');
+            const closeSignup = document.getElementById('closeSignup');
+            const goToSignup = document.getElementById('goToSignup');
+            const goToLogin = document.getElementById('goToLogin');
+            
+            // Abrir modal de login
+            loginButton.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+            });
+            
+            // Abrir modal de cadastro
+            signupButton.addEventListener('click', function() {
+                signupModal.style.display = 'flex';
+            });
+            
+            // Fechar modais
+            closeLogin.addEventListener('click', function() {
+                loginModal.style.display = 'none';
+            });
+            
+            closeSignup.addEventListener('click', function() {
+                signupModal.style.display = 'none';
+            });
+            
+            // Alternar entre login e cadastro
+            goToSignup.addEventListener('click', function() {
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'flex';
+            });
+            
+            goToLogin.addEventListener('click', function() {
+                signupModal.style.display = 'none';
+                loginModal.style.display = 'flex';
+            });
+            
+            // Fechar modal ao clicar fora dele
+            window.addEventListener('click', function(event) {
+                if (event.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (event.target === signupModal) {
+                    signupModal.style.display = 'none';
+                }
+            });
+            
+            // Validação do formulário de cadastro
+            document.getElementById('signupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const password = document.getElementById('signupPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('As senhas não coincidem!');
+                    return;
+                }
+                
+                // Aqui você normalmente enviaria os dados para o servidor
+                alert('Cadastro realizado com sucesso!');
+                signupModal.style.display = 'none';
+            });
+            
+            // Validação do formulário de login
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Aqui você normalmente validaria as credenciais com o servidor
+                alert('Login realizado com sucesso!');
+                loginModal.style.display = 'none';
+            });
+            
+            // Chama a função de geolocalização ao carregar a página
+            getUserLocation();
+        });
+    </script>
+</body>
+</html>
